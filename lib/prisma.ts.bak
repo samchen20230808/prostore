@@ -1,0 +1,11 @@
+import { PrismaClient } from "./generated/prisma";
+
+const globalForPrisma = global as unknown as { prisma: PrismaClient };
+
+export const prisma =
+  globalForPrisma.prisma ||
+  new PrismaClient({
+    log: ["query"], // 這能讓你在終端機看到 SQL，超好用
+  });
+
+if (process.env.NODE_ENV !== "production") globalForPrisma.prisma = prisma;
