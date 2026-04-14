@@ -36,7 +36,7 @@ const sortOrders = ["newest", "lowest", "highest", "rating"];
 export async function generateMetadata({
   searchParams,
 }: {
-  params: Promise<{
+  searchParams: Promise<{
     category: string;
     query: string;
     price: string;
