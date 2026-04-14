@@ -1,33 +1,40 @@
 "use client";
+import { useEffect, useState } from "react";
 import { MoonIcon, SunIcon, SunMoonIcon } from "lucide-react";
 import { useTheme } from "next-themes";
-import dynamic from "next/dynamic";
-
-const ButtonToggle = dynamic(
-  () => import("@/components/ui/button").then((mod) => mod.Button),
-  { ssr: false },
-);
+import { Button } from "@/components/ui/button";
 
 export default function ModeToggle() {
   const { theme, setTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    const timeout = window.setTimeout(() => setMounted(true), 0);
+    return () => window.clearTimeout(timeout);
+  }, []);
 
   function toggleTheme() {
     setTheme((theme) => (theme === "dark" ? "light" : "dark"));
   }
 
   return (
-    <ButtonToggle
+    <Button
       variant="ghost"
       onClick={toggleTheme}
-      suppressHydrationWarning
+      size="icon"
+      aria-label="Toggle theme"
     >
-      {theme === "system" ? (
-        <SunMoonIcon />
-      ) : theme === "dark" ? (
-        <MoonIcon />
+      {mounted ? (
+        theme === "system" ? (
+          <SunMoonIcon />
+        ) : theme === "dark" ? (
+          <MoonIcon />
+        ) : (
+          <SunIcon />
+        )
       ) : (
-        <SunIcon />
+        <span className="h-5 w-5" />
       )}
-    </ButtonToggle>
+    </Button>
   );
 }

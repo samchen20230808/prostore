@@ -5,11 +5,11 @@ import { useState } from "react";
 
 export default function ProductImages({ images }: { images: string[] }) {
   const [current, setCurrent] = useState(0);
-  console.log("ProductImages", images);
+  // console.log("ProductImages", images);
   return (
     <div className="space-y-4">
       <Image
-        src={images[current]}
+        src={images[current] || "/images/no-picture.png"}
         alt="product image"
         width={1000}
         height={1000}
@@ -25,7 +25,12 @@ export default function ProductImages({ images }: { images: string[] }) {
               current === index && "border-orange-500",
             )}
           >
-            <Image src={img} alt="image" width={100} height={100} />
+            <Image
+              src={img || "/images/no-picture.png"}
+              alt="image"
+              width={100}
+              height={100}
+            />
           </div>
         ))}
       </div>

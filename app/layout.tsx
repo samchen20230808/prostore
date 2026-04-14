@@ -1,4 +1,5 @@
 import "@/assets/styles/globals.css";
+import { Toaster } from "@/components/ui/sonner";
 import { APP_DESCRIPTION, APP_NAME, SERVER_URL } from "@/lib/constants";
 import { cn } from "@/lib/utils";
 import type { Metadata } from "next";
@@ -31,6 +32,7 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           {children}
+          <Toaster />
         </ThemeProvider>
       </body>
     </html>

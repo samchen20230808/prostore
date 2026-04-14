@@ -2,6 +2,7 @@
   "compilerOptions": {
     "target": "ES2017",
     "lib": ["dom", "dom.iterable", "esnext"],
+    "types": ["jest", "node"],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
@@ -29,7 +30,9 @@
     ".next/types/**/*.ts",
     ".next/dev/types/**/*.ts",
     "**/*.mts",
-    "lib/prisma.ts.bak"
+    "lib/prisma.ts.bak",
+    "middleware.ts.bak",
+    "app/(root)/shipping-address/shipping-address-form-copy.tsx"
   ],
   "exclude": ["node_modules"]
 }
