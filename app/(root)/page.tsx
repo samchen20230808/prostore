@@ -1,7 +1,9 @@
+import DealCountDown from "@/components/deal-countdown";
+import IconBoxes from "@/components/icon-boxes";
 import ProductCarousel from "@/components/shared/product/product-carousel";
 import ProductList from "@/components/shared/product/product-list";
 import ViewAllProductsButton from "@/components/view-all-products-button";
-import sampleData from "@/db/sample-data";
+// import sampleData from "@/db/sample-data";
 import {
   getFeaturedProducts,
   getLatestProducts,
@@ -23,6 +25,8 @@ export default async function HomePage() {
       <ProductCarousel products={featuredProducts} />
       <ProductList data={lastestProducts} title="Newest Arrivals" />
       <ViewAllProductsButton />
+      <DealCountDown />
+      <IconBoxes />
     </>
   );
 }

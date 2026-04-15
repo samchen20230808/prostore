@@ -14,7 +14,7 @@ import Link from "next/link";
 
 export default function ProductCarousel({ products }: { products: Product[] }) {
   if (products.length == 0) return;
-  console.log(products);
+  // console.log(products);
   return (
     <Carousel
       className="w-full mb-12"

@@ -11,6 +11,7 @@ import { paypal } from "../paypal";
 import { revalidatePath } from "next/cache";
 import { PAGE_SIZE } from "../constants";
 import { Prisma } from "@prisma/client";
+import { sendPurcaseReceipt } from "@/email";
 
 export async function createOrder() {
   try {
@@ -108,6 +109,7 @@ export async function getOrderById(orderId: string) {
   const formatedData = {
     ...data,
     shippingAddress: data.shippingAddress as ShippingAddress,
+    paymentResult: data.paymentResult as PaymentResult,
   };
 
   return convertToPlainObject(formatedData) as Order;
@@ -233,6 +235,15 @@ export async function updateOrderToPaid({
     },
   });
   if (!updatedOrder) throw new Error("Order not found");
+
+  // send email
+  sendPurcaseReceipt({
+    order: {
+      ...updatedOrder,
+      shippingAddress: updatedOrder.shippingAddress as ShippingAddress,
+      paymentResult: updatedOrder.paymentResult as PaymentResult,
+    },
+  });
 }
 
 export async function getMyOrders({

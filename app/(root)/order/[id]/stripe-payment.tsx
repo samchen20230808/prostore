@@ -69,7 +69,7 @@ function StripeForm({
       .confirmPayment({
         elements,
         confirmParams: {
-          return_url: `${process.env.NEXT_PUBLIC_SERVER_URL}/order/${orderId}/stripe-payment-success`,
+          return_url: `${SERVER_URL}/order/${orderId}/stripe-payment-success`,
         },
       })
       .then(({ error }) => {
