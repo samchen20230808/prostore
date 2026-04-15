@@ -2,7 +2,7 @@
 
 import { prisma } from "@/db/prisma";
 import { InsertProduct, UpdateProduct } from "@/types";
-import { Prisma } from "@prisma/client";
+import { Prisma } from "@/lib/generated/prisma";
 import { revalidatePath } from "next/cache";
 import { LATEST_PRODUCTS_LIMIT, PAGE_SIZE } from "../constants";
 import { convertToPlainObject, formatError } from "../utils";

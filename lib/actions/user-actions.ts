@@ -1,21 +1,20 @@
 "use server";
 
 import { auth, signIn, signOut } from "@/auth";
+import { prisma } from "@/db/prisma";
+import { PaymentMethod, ShippingAddress, User } from "@/types";
+import { hashSync } from "bcrypt-ts-edge";
+import { revalidatePath } from "next/cache";
+import { isRedirectError } from "next/dist/client/components/redirect-error";
+import { PAGE_SIZE } from "../constants";
+import { Prisma } from "../generated/prisma";
+import { formatError } from "../utils";
 import {
   paymentMethodSchema,
   shippingAddressSchema,
   signInSchema,
   signUpSchema,
-  updateUserSchema,
 } from "../validators";
-import { isRedirectError } from "next/dist/client/components/redirect-error";
-import { hashSync } from "bcrypt-ts-edge";
-import { prisma } from "@/db/prisma";
-import { formatError } from "../utils";
-import { PaymentMethod, ShippingAddress, User } from "@/types";
-import { PAGE_SIZE } from "../constants";
-import { revalidatePath } from "next/cache";
-import { Prisma } from "../generated/prisma";
 
 export async function signInWithCredentials(
   preState: unknown,
