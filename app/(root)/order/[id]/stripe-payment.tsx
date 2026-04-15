@@ -58,7 +58,10 @@ function StripeForm({
   async function handleSubmit(e: FormEvent) {
     e.preventDefault();
     console.log("submit");
-    if (!stripe || !elements || !email) return;
+    if (!stripe || !elements || !email) {
+      console.log("error: ", { stripe, elements, email });
+      return;
+    }
     setIsLoading(true);
     stripe
       .confirmPayment({
