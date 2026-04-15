@@ -13,6 +13,7 @@ import { FormEvent, useMemo, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { formatCurrency } from "@/lib/utils";
 import { SERVER_URL } from "@/lib/constants";
+import { toast } from "sonner";
 
 export default function StripePayment({
   priceInCents,
@@ -59,7 +60,8 @@ function StripeForm({
     e.preventDefault();
     console.log("submit");
     if (!stripe || !elements || !email) {
-      console.log("error: ", { stripe, elements, email });
+      if (!email)
+        toast.error("Need email", { className: " !text-red-50 !bg-red-500" });
       return;
     }
     setIsLoading(true);
